@@ -1,0 +1,83 @@
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+body{
+  background-color: cadetblue;
+}
+.shorten_bigdiv{
+  padding: 40px 40px;
+  background-color:cadetblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+h2{
+  color: white;
+}
+.shorten_inpdiv{
+  border: 1px solid black;
+  width: 100%;
+  padding: 20px 10px;
+  margin: 20px 0px;
+  background-color: rgb(72, 121, 122);
+  border: 1px solid rgb(72, 121, 122);
+  border-radius: 10px;
+
+  
+}
+.shorten_inpdiv input{
+  width: 90%;
+  padding: 20px 6px;
+  outline: none;
+  background-color: white;
+  border: 1px solid cadetblue;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.shorten_inpdiv button{
+  background-color: cadetblue;
+  border: 1px solid cadetblue;
+  color: white;
+  padding: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.shorten_resultdiv{
+  border: 1px solid black;
+  width: 100%;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border: 1px solid rgb(72, 121, 122);
+
+}
+.shorten_resultdiv button{
+  background-color: cadetblue;
+  border: 1px solid cadetblue;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+.shorten_resultdiv span{
+   color: rgb(64, 110, 111);
+   padding: 0px 10px;
+}
+.shorten_inpdiv button:hover,
+.shorten_resultdiv button:hover{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+ 
+}
