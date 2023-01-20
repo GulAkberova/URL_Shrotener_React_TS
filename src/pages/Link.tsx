@@ -1,64 +1,68 @@
-import React, { useEffect, useState } from 'react'
-import { Product } from '../models/api/Product';
-import { ProductService } from '../service/ProductService';
-import { IBaseService } from '../service/IBaseService';
+import React, { SyntheticEvent, useEffect, useState } from "react";
+import { IBaseService } from "../service/IBaseService";
+import { BaseService } from "../service/BaseService";
+import { BaseModel } from "../models/api/BaseModel";
 function Link() {
+  const [products, setproducts] = useState<BaseModel[]>([]);
+  const [updated, setUpdated] = useState<string>("");
+  const [copy,setCopy]=useState(false)
 
-    const [products, setproducts] = useState<Product[]>([]);
-    const [updated, setUpdated] = useState<string>("");
-    const generateLink = () => {
+  const generateLink = (e: SyntheticEvent) => {
+    let productService = new BaseService();
+    console.log(updated);
+    productService.getİnfo(updated).then((res) => {
+      // console.log(res);
+      setproducts([...products,{
+        original_link: res.result.original_link,
+        full_short_link: res.result.full_short_link
+      }])
 
-        let productService = new ProductService();
-       console.log(productService);
-       
-        productService.getAll(updated)
-            .then(res => {
-                setproducts(res);
-            })
-       console.log(products);
-       
-    
-      }
+     
       
+    });
+  };
+ const handleCopy=(updated:string)=>{
+  setCopy(true)
+  setTimeout(() => {
+    setCopy(false)
+    
+  }, 3000);
+  navigator.clipboard.writeText(updated);
+  alert('copied')
+ }
+  console.log(products)
   return (
     <div>
-      <div className='shorten_bigdiv'>
+      <div className="shorten_bigdiv">
         <h2>GENERATE YOUR SHORTER URL!</h2>
-     
-       <div className='shorten_inpdiv'>
-       <input
+
+        <div className="shorten_inpdiv">
+          <input
             value={updated}
             onChange={(e) => setUpdated(e.target.value)}
             type="text"
             placeholder="Shorten a link here..."
           />
-    <button onClick={() => generateLink()}>Shorten it!</button>
-       </div>
-       <div className='shorten_resultdiv'>
-        <p>https://github.com/GulAkberova/pages/Dictionary.tsx</p>
-        <div>
-          <span>ttps://github.sdgrd</span>
-          <button>
-            Coppy
-          </button>
+          <button onClick={generateLink}>Shorten it!</button>
         </div>
-        
 
-       </div>
-       <div className='shorten_resultdiv'>
-        <p>https://github.com/GulAkberova/pages/Dictionary.tsx</p>
-        <div>
-          <span>ttps://github.sdgrd</span>
-          <button>
-            Coppy
-          </button>
-        </div>
-        
-
-       </div>
-       </div>
+        { products && 
+  products.map((i, key:number)=>(
+    <div className="shorten_resultdiv" key={key}>
+    <p>{i.original_link}</p>
+    <div>
+      <span>{i.full_short_link}</span>
+      <button onClick={(key)=>handleCopy(i.full_short_link)}>{copy? <p>Copied</p>:<p>Copy</p>
+}</button>
     </div>
-  )
+  </div>
+
+  ))
+}
+      
+      </div>
+    </div>
+  );
 }
 
-export default Link
+export default Link;
